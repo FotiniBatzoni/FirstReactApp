@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import Loading from './Loading';
 
 
 class App extends Component {
@@ -36,7 +37,7 @@ class App extends Component {
         <p>{user.email}</p>
         <hr/>
       </div> 
-      ) : 'Loading'}
+      ) : <Loading message='Hey Hey Hey'/>}
     </div>
   } 
 }
