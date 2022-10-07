@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import axios from 'axios'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Heloooooo
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+    //state
+    this.state = {
+      users: []
+    }
+  }
+
+  getusers(){
+    axios('https://api.randomuser.me/?nat=US&result=5')
+    .then(response => this.setState({
+      users: response.data.results
+    }))
+  }
+
+  componentWillMount(){
+    this.getusers();
+  }
+
+  render(){
+    return <div className="App">
+      {this.state.users.map(user => 
+      <div>
+        <h3>{user.name.first}</h3>
+        <p>{user.email}</p>
+        <hr/>
+      </div> 
+      )}
     </div>
-  );
+  } 
 }
 
 export default App;
